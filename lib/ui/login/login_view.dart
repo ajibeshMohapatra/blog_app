@@ -43,8 +43,11 @@ class LoginView extends StatelessWidget {
                   children: [
                     BusyButton(
                       title: 'Login',
+                      busy: model.isBusy,
                       onPressed: () {
-                        // TODO: Perform firebase login here
+                        model.logIn(
+                            email: emailController.text,
+                            password: passwordController.text);
                       },
                     )
                   ],
@@ -53,7 +56,10 @@ class LoginView extends StatelessWidget {
                 TextLink(
                   'Create an Account if you\'re new.',
                   onPressed: () {
-                    // TODO: Handle navigation
+                    model.navigationToSignUp().then((value) {
+                      emailController.clear();
+                      passwordController.clear();
+                    });
                   },
                 )
               ],

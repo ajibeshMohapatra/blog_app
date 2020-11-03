@@ -7,6 +7,7 @@ import 'package:stacked/stacked.dart';
 
 class SignUpView extends StatelessWidget {
   final emailController = TextEditingController();
+  final fullNameController = TextEditingController();
   final passwordController = TextEditingController();
 
   @override
@@ -27,7 +28,11 @@ class SignUpView extends StatelessWidget {
                 ),
               ),
               verticalSpaceLarge,
-              // TODO: Add additional user data here to save (episode 2)
+              InputField(
+                placeholder: 'Full Name',
+                controller: fullNameController,
+              ),
+              verticalSpaceSmall,
               InputField(
                 placeholder: 'Email',
                 controller: emailController,
@@ -46,8 +51,13 @@ class SignUpView extends StatelessWidget {
                 children: [
                   BusyButton(
                     title: 'Sign Up',
+                    busy: model.isBusy,
                     onPressed: () {
-                      // TODO: Perform firebase login here
+                      model.signUp(
+                        email: emailController.text,
+                        password: passwordController.text,
+                        fullName: fullNameController.text,
+                      );
                     },
                   )
                 ],
